@@ -36,8 +36,9 @@
 #    f3/f4 = start/end frequencies [Hz] at the maximum harminic degree
 #    nf = number of frequency samples for each harmonic degree
 # 2. imaginary frequency (<= 0.0) [Hz]
-# 3  estimated minimum Q value and minimum significance (ratio minimum to
-#    amplitude)
+# 3  estimated minimum Q value and minimum significance (only modes whose
+#    spectral peaks have this minimum significance to the maximum peak in
+#    the whole response spectrum are condidered)
 # 4. lower and upper cut-off harmonic degrees to be calculated, and the
 #    sampling interval
 #------------------------------------------------------------------------------
