@@ -35,7 +35,12 @@ c
         gamma=cdsqrt((2.25d0,0.d0)/crrup(lyup)**2
      &      -(comi2+(4.d0,0.d0)*cgrup(lyup)/crrup(lyup))
      &                         /cvpup(lyup)**2)
+c
+c       to ensure that only radiating rather than converging waves are allowed
+c       through the top boundary (update June 2025).
+c
         if(dimag(gamma).lt.0.d0)gamma=-gamma
+c
         yup(1)=(1.d0,0.d0)
         yup(2)=croup(lyup)*cvpup(lyup)**2
      &        *((1.5d0,0.d0)-gamma*crrup(lyup))

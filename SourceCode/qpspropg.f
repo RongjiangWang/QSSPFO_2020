@@ -56,7 +56,12 @@ c
           cxi=cdsqrt((0.25d0,0.d0)*(cgrup(lyup)/cvp2rr
      &        -(1.d0,0.d0)/crrup(lyup)-cn2/cgrup(lyup))**2
      &        +(ck2-comi2/cvp2rr)*((1.d0,0.d0)-cn2/comi2))
+c
+c         to ensure that only radiating rather than converging waves are allowed
+c         through the top boundary (update June 2025).
+c
           if(dimag(cxi).lt.0.d0)cxi=-cxi
+c
           c11=cgrup(lyup)/cvp2rr-(1.d0,0.d0)/crrup(lyup)
           c12=ck2*crrup(lyup)-comi2*crrup(lyup)/cvp2rr
           yupc(1,1)=c12

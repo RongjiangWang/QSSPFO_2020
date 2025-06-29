@@ -10,6 +10,7 @@ c
       character*80 inputfile
       integer*4 i,ldeg,nm
       real*8 f
+      complex*16 ca,cb,cc
 c
       real*8 fm(nmmax),qm(nmmax)
       complex*16 cam(nmmax)
@@ -43,7 +44,7 @@ c
       print *,'#              (wang@gfz-potsdam.de)                 #'
       print *,'#                                                    #'
       print *,'#           GeoForschungsZentrum Potsdam             #'
-      print *,'#            last modified: September 2020           #'
+      print *,'#              last update: June 2025                #'
       print *,'######################################################'
       print *,'                          '
       write(*,'(a,$)')' the input data file is '
@@ -67,10 +68,10 @@ c
       selsh=ldeg2.ge.1.and.lys.ge.lyob.and.lyr.ge.lyob
 c
       open(21,file=smodesfile,status='unknown')
-      write(21,'(a)')'   l   n   f[Hz]       Amplitude'
+      write(21,'(a)')'   l   n           f[Hz]       Amplitude'
      &             //'  Phase[deg]               Q'
       open(22,file=tmodesfile,status='unknown')
-      write(22,'(a)')'   l   n   f[Hz]       Amplitude'
+      write(22,'(a)')'   l   n           f[Hz]       Amplitude'
      &             //'  Phase[deg]               Q'
 c
       do ldeg=ldeg1,ldeg2,dldeg
@@ -115,42 +116,38 @@ c
       close(22)
 c
       open(31,file='Spc_'//smodesfile,status='unknown')
-      write(31,'(a)')'            f_Hz           f_mHz'//
-     &               '           T_min          T_hour'//
-     &               '          SpcAll          SpcSum'//
-     &               '          SpcRes'
+      write(31,'(a)')'           f_mHz'//
+     &               '        AmSpcAll    PhSpcAll'//
+     &               '        AmSpcSum    PhSpcSum'//
+     &               '        AmSpcRes    PhSpcRes'
       do i=1,nf
         f=flw+dble(i-1)*df
-        write(31,'(2E16.8,$)')f,f*1.0d+03
-        if(f.le.0.d0)then
-          f=0.d0
-        write(31,'(2E16.8,$)')f,f
-        else
-          write(31,'(2E16.8,$)')1.d0/f/60.d0,1.d0/f/3600.d0
-        endif
-        write(31,'(3E16.8)')cdabs(cpsvspc(i)),
-     &                 cdabs(cpsvspc(i)-cpsvres(i)),cdabs(cpsvres(i))
+        ca=cpsvspc(i)
+        cb=cpsvspc(i)-cpsvres(i)
+        cc=cpsvres(i)
+        write(31,'(E16.8,3(E16.8,F12.4))')f*1.0d+03,
+     &                    cdabs(ca),datan2(dimag(ca),dreal(ca))/DEG2RAD,
+     &                    cdabs(cb),datan2(dimag(cb),dreal(cb))/DEG2RAD,
+     &                    cdabs(cc),datan2(dimag(cc),dreal(cc))/DEG2RAD
       enddo
       close(31)
 c
       if(.not.selsh)goto 100
 c
       open(32,file='Spc_'//tmodesfile,status='unknown')
-      write(32,'(a)')'            f_Hz           f_mHz'//
-     &               '           T_min          T_hour'//
-     &               '          SpcAll          SpcSum'//
-     &               '          SpcRes'
+      write(32,'(a)')'           f_mHz'//
+     &               '        AmSpcAll    PhSpcAll'//
+     &               '        AmSpcSum    PhSpcSum'//
+     &               '        AmSpcRes    PhSpcRes'
       do i=1,nf
         f=flw+dble(i-1)*df
-        write(32,'(2E16.8,$)')f,f*1.0d+03
-        if(f.le.0.d0)then
-          f=0.d0
-        write(32,'(2E16.8,$)')f,f
-        else
-          write(32,'(2E16.8,$)')1.d0/f/60.d0,1.d0/f/3600.d0
-        endif
-        write(32,'(3E16.8)')cdabs(cshspc(i)),cdabs(cshspc(i)-cshres(i)),
-     &                      cdabs(cshres(i))
+        ca=cshspc(i)
+        cb=cshspc(i)-cshres(i)
+        cc=cshres(i)
+        write(32,'(E16.8,3(E16.8,F12.4))')f*1.0d+03,
+     &                    cdabs(ca),datan2(dimag(ca),dreal(ca))/DEG2RAD,
+     &                    cdabs(cb),datan2(dimag(cb),dreal(cb))/DEG2RAD,
+     &                    cdabs(cc),datan2(dimag(cc),dreal(cc))/DEG2RAD
       enddo
       close(32)
 c
