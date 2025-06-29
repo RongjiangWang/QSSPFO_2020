@@ -526,6 +526,7 @@ c
       if(unit.eq.0)goto 900
 c
       do m=1,nm
+        cam(m)=cam(m)*dcmplx(fnorm,0.d0)
         am=2.d0*cdabs(cam(m))
         ph=datan2(dimag(cam(m)),dreal(cam(m)))/DEG2RAD
         write(unit,1000)ldeg,m-1,fm(m),am,ph,0.5d0/qm(m)
