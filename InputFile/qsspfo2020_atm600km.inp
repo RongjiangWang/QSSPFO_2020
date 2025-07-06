@@ -1,4 +1,4 @@
-# This is the input file of FORTRAN program "qsspfo2020" for calculating
+# This is the input file of FORTRAN program "qsspfo2025" for calculating
 # synthetic seismogram spectra of a self-gravitating, spherically symmetric,
 # isotropic and viscoelastic planet.
 #
@@ -8,7 +8,7 @@
 # GFZ German Reseach Centre for Geosciences
 # Telegrafenberg, D-14473 Potsdam, Germany
 #
-# Last modified: Potsdam, August, 2020
+# Last modified: Zhuhai, June 2025
 #
 # = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 # If not specified, SI Unit System is used overall!
@@ -36,9 +36,8 @@
 #    f3/f4 = start/end frequencies [Hz] at the maximum harminic degree
 #    nf = number of frequency samples for each harmonic degree
 # 2. imaginary frequency (<= 0.0) [Hz]
-# 3  estimated minimum Q value and minimum significance (only modes whose
-#    spectral peaks have this minimum significance to the maximum peak in
-#    the whole response spectrum are condidered)
+# 3  estimated minimum Q value and minimum significance (ratio minimum to
+#    amplitude)
 # 4. lower and upper cut-off harmonic degrees to be calculated, and the
 #    sampling interval
 #------------------------------------------------------------------------------
