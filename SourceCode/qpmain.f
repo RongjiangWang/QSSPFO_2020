@@ -90,6 +90,7 @@ c
           cpsvspc(i)=cpsvspc(i)+dcmplx(psvspecr(i),psvspeci(i))
         enddo
 c
+        print *,'  ... determine spheroidal modes ...'
         call fmodes1(ldeg,flw,fup,fi,nf,psvspecr,psvspeci,
      &              cam,fm,qm,nm,nmmax,qmmax,pkratio,21)
 c
@@ -103,6 +104,7 @@ c
           cshspc(i)=cshspc(i)+dcmplx(shspecr(i),shspeci(i))
         enddo
 c
+        print *,'  ... determine toroidal modes ...'
         call fmodes1(ldeg,flw,fup,fi,nf,shspecr,shspeci,
      &              cam,fm,qm,nm,nmmax,qmmax,pkratio,22)
 c
