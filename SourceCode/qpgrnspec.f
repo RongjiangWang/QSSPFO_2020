@@ -200,7 +200,7 @@ c
           cy2=cs1*ypsv(2,1)+cs2*ypsv(2,2)+cs4*ypsv(2,4)
           psvspecr(lf)=-dreal(cy2)
           psvspeci(lf)=-dimag(cy2)
-          else
+        else
 c
 c         velocity response
 c
@@ -211,15 +211,13 @@ c
 c
 c       strike-slip source for toroidal modes
 c
-        if(ldeg.lt.1.or.lys.lt.lyob.or.ly.gt.lycm)then
-c
-c         velocity response
-c
+        if(ldeg.lt.1.or.lys.lt.lyob.or.lys.ge.lycm.or.
+     &     lyr.lt.lyob.or.lyr.ge.lycm)then
           shspecr(lf)=0.d0
           shspeci(lf)=0.d0
         else
 c
-c         displacement response
+c         velocity response
 c
           ct1=dcmplx(disk/(dble(ldeg)*dble(ldeg+1)
      &       *roup(lys)),0.d0)/cvsup(lys)**2
